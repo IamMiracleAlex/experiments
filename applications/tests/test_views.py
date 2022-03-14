@@ -28,12 +28,12 @@ class ApplicationViewTest(TestCase):
             'title': 'Mr',
             'first_name': 'Miracle',
             'surname': 'Alex',
-            'dob': '1995-03-30',
+            'date_of_birth': '1995-03-30',
             'company_name': 'bidnamic',
             'address': 'lagos',
             'telephone': '0812233444',
             'bidding_settings': Application.HIGH,
-            'ads_id': '123344555',
+            'google_account_ads_id': '1234567890',
         }
         resp = self.client.post(url, data)
         self.assertEqual(resp.status_code, 302)

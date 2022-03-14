@@ -11,12 +11,12 @@ class ApplicationFormTest(TestCase):
             'title': 'Mr',
             'first_name': 'Miracle',
             'surname': 'Alex',
-            'dob': '1995-03-30',
+            'date_of_birth': '1995-03-30',
             'company_name': 'bidnamic',
             'address': 'lagos',
             'telephone': '0812233444',
             'bidding_settings': Application.HIGH,
-            'ads_id': '123344555',
+            'google_account_ads_id': '1234567890',
         }
         self.form_class = ApplicationForm
 
@@ -34,8 +34,19 @@ class ApplicationFormTest(TestCase):
         Assert birthdate must be up to 18 years
         '''
 
-        self.form_data['dob'] = '2020-03-22'
+        self.form_data['date_of_birth'] = '2020-03-22'
         form = self.form_class(data=self.form_data)
 
         self.assertFalse(form.is_valid())
-        self.assertEqual(form.errors['dob'][0], "You must be 18 years old or older to fill this form")
+        self.assertEqual(form.errors['date_of_birth'][0], "You must be 18 years old or older to fill this form")
+
+    def test_google_accounts_ads_id_validity(self):
+        '''
+        Assert google accounts ads id must be 10 digits
+        '''
+
+        self.form_data['google_account_ads_id'] = '123456789'
+        form = self.form_class(data=self.form_data)
+
+        self.assertFalse(form.is_valid())
+        self.assertEqual(form.errors['google_account_ads_id'][0], "Google account ID must be 10 digits")
