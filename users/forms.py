@@ -65,7 +65,7 @@ class SignupForm(forms.Form):
 
         return self.cleaned_data
 
-    def save(self, commit=True):
+    def save(self):
         try:
             user = User.objects.create_user(
                 username=self.cleaned_data.get('username'),
