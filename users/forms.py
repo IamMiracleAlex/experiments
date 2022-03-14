@@ -10,8 +10,6 @@ class LoginForm(forms.Form):
 
 
 class SignupForm(forms.Form):
-    DATE_FORMATS = ['%d/%m/%Y']
-
     username = forms.CharField(max_length=50)
     email = forms.EmailField(max_length=100)
     password = forms.CharField(max_length=30, widget=forms.PasswordInput)
@@ -19,7 +17,7 @@ class SignupForm(forms.Form):
 
     error_messages = {
         'short_password': _(
-            "The password is too short, minimum of 6 characters."
+            "The password is too short, minimum of 6 characters"
         ),
         'username_exists': _(
             "This username is already registered"
@@ -28,8 +26,7 @@ class SignupForm(forms.Form):
             "This email address is already registered"
         ),
         'password_mismatch': _(
-            "The password and password "
-            "confirmation do not match."
+            "The password and password confirmation do not match"
         ),
     }
 

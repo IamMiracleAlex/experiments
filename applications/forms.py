@@ -7,7 +7,6 @@ from applications.models import Application
 
 
 class ApplicationForm(forms.ModelForm):
-    dob = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
 
     class Meta:
         model = Application

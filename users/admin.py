@@ -6,5 +6,5 @@ from users.models import User
 
 
 @admin.register(User)
-class CustomUserAdminAdmin(UserAdmin):
+class CustomUserAdmin(UserAdmin):
     ...
