@@ -5,7 +5,6 @@ services:
     image: bidnamic_web
     volumes:
       - static:/static
-      - media:/media 
     build: .
     restart: always
     ports:
@@ -15,7 +14,15 @@ services:
       - PYTHONUNBUFFERED=1
       - PYTHONDONTWRITEBYTECODE=1
 
+  nginx:
+    image: nginx
+    pull_policy: always
+    restart: always
+    volumes:
+      - static:/static
+    ports:
+      - "80:80"
+      
 volumes:
   static:
-  media:
 

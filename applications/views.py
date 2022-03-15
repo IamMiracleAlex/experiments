@@ -3,12 +3,13 @@ from django.views import View
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-
 from applications.forms import ApplicationForm
 from applications.models import Application
 
 
 class IndexView(View):
+    '''Landing page view'''
+    
     template_name = 'applications/index.html'
     
     def get(self, request):
@@ -16,6 +17,8 @@ class IndexView(View):
 
 
 class CreateView(View):
+    '''Create an applicatiom'''
+
     template_name = 'applications/create_applications.html'
     form_class = ApplicationForm 
     
@@ -34,6 +37,8 @@ class CreateView(View):
 
 
 class ListView(View):
+    '''List all applications'''
+
     template_name = 'applications/list_applications.html'
     paginate_by = 10
 
@@ -55,6 +60,7 @@ class ListView(View):
 
 
 class DeleteView(View):
+    '''Delete applications'''
 
     def get(self, request, id):
         application = get_object_or_404(Application, id=id)

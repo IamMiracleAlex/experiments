@@ -5,7 +5,6 @@ services:
     image: bidnamic_web
     volumes:
       - static:/static
-      - media:/media 
     build: .
     restart: always
     ports:
@@ -14,6 +13,8 @@ services:
     environment:
       - PYTHONUNBUFFERED=1
       - PYTHONDONTWRITEBYTECODE=1
+    depends_on:
+      - database
 
   database:
     restart: always
@@ -28,7 +29,19 @@ services:
       - "5432:${DB_PORT}"
     # expose:
     #    - 5432     
-
+  nginx:
+    # image: nginx
+    build:
+      context: .
+      dockerfile: ./nginx/Dockerfile
+    restart: always
+    volumes:
+      - static:/static
+    ports:
+      - "80:80"
+      # - "80:8000"
+    depends_on:
+      - web
+      
 volumes:
   static:
-  media:

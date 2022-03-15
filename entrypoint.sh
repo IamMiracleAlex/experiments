@@ -5,4 +5,4 @@ python manage.py collectstatic --no-input
 
 echo Starting Gunicorn.
 
-gunicorn mirapayments.wsgi:application --bind 0.0.0.0:8000 --workers 4
+gunicorn bidnamic.wsgi:application --bind 0.0.0.0:8000 --workers 4

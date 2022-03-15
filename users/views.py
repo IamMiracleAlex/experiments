@@ -8,6 +8,8 @@ from users.forms import LoginForm
 
 
 class LoginView(View):
+    '''Login into the application'''
+    
     template_name = 'users/login.html'
     form_class = LoginForm
 
@@ -35,6 +37,7 @@ class LoginView(View):
 
 
 class LogoutView(View):
+    '''Logout from current session'''
 
     def get(self, request):
         logout(request)
@@ -43,6 +46,8 @@ class LogoutView(View):
 
 
 class SignupView(View):
+    '''Sign Up a new user'''
+
     template_name = 'users/signup.html'
     form_class = SignupForm
 

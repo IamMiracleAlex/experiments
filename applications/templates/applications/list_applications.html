@@ -56,11 +56,11 @@
                         <td>{{ app.title }}</td>
                         <td>{{ app.first_name }}</td>
                         <td> {{ app.surname }}</td>
-                        <td>{{ app.dob }}</td>
+                        <td>{{ app.date_of_birth }}</td>
                         <td>{{ app.company_name }}</td>
                         <td>{{ app.telephone }}</td>
                         <td>{{ app.get_bidding_settings_display }}</td>
-                        <td>{{ app.ads_id }}</td>
+                        <td>{{ app.google_account_ads_id }}</td>
                         <td>{{ app.created_at }}</td>
                         <td>
                           
@@ -69,6 +69,8 @@
                             </a>
                         </td>
                     </tr>
+                    {% comment %} {% empty %} {% endcomment %}
+
                     {% endfor %}
                 </tbody>
 

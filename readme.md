@@ -4,7 +4,7 @@
 
 # To Run (Docker)
 - Start Docker
-- `docker-compose docker-compose.local.yml up --build`
+- `docker-compose -f docker-compose-local.yml up --build`
 - Go to `localhost:8000` to access the site
 
 # To Run
