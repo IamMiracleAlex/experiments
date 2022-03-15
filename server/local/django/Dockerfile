@@ -6,8 +6,8 @@ RUN apk update \
 
 RUN pip install --upgrade pip
 
-COPY ./requirements_dev.txt .
-RUN pip install -r requirements_dev.txt
+COPY ./requirements.txt .
+RUN pip install -r requirements.txt
 
 COPY . .
 

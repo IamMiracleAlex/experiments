@@ -1,14 +1,13 @@
 #!/bin/sh
 
 
-echo "Initializing postgres db..."
+echo "Connecting to postgres database..."
 
 while ! nc -z $DB_HOST $DB_PORT; do
   sleep 1
 done
 
-echo "postgres database has initialized successfully"
-fi
+echo "Connected to postgres database successfully"
 
 
 python manage.py migrate
@@ -16,6 +15,4 @@ python manage.py collectstatic --no-input
 
 echo Starting the server.
 
-python manage.py runserver
-
-# exec "$@"
+gunicorn bidnamic.wsgi:application --bind 0.0.0.0:8000 --workers 4

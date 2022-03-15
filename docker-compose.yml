@@ -2,7 +2,6 @@ version: '3.8'
 
 services:
   web:
-    # image: bidnamic_web
     build:
       context: .
       dockerfile: ./server/prod/django/Dockerfile
@@ -14,12 +13,13 @@ services:
     environment:
       - PYTHONUNBUFFERED=1
       - PYTHONDONTWRITEBYTECODE=1
+    env_file:
+      - .env
 
   nginx:
-    # image: nginx
     build:
       context: .
-      dockerfile: ./server/prod/nginx/Dockerfile
+      dockerfile: ./server/nginx/Dockerfile
     restart: always
     volumes:
       - static:/static
