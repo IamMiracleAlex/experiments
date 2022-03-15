@@ -6,13 +6,14 @@ RUN apk update \
 
 RUN pip install --upgrade pip
 
-COPY ./requirements_dev.txt .
-RUN pip install -r requirements_dev.txt
+COPY ./requirements.txt .
 
-# COPY . /app
+RUN pip install -r requirements.txt
+
 COPY . .
 
 WORKDIR /
 
-COPY ./entrypoint.sh /
+COPY ./server/prod/django/entrypoint.sh /
+
 ENTRYPOINT ["sh", "/entrypoint.sh"]

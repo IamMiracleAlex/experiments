@@ -4,12 +4,14 @@
 
 # To Run (Docker)
 - Start Docker
-- `docker-compose -f docker-compose-local.yml up --build`
+- copy `.env.local.sample` to `.env` 
+- `docker-compose -f docker-compose.local.yml up --build`
 - Go to `localhost:8000` to access the site
 
 # To Run
 - Clone this repository
 - Create and activate a virtual environment
+- copy `.env.local.sample` to `.env` and update it to have `USE_DOCKER=No`
 - `pip install -r requirements_dev.txt`
 - `python manage.py migrate`
 - `python manage.py runserver`

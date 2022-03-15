@@ -2,26 +2,31 @@ version: '3.8'
 
 services:
   web:
-    image: bidnamic_web
+    # image: bidnamic_web
+    build:
+      context: .
+      dockerfile: ./server/prod/django/Dockerfile
     volumes:
       - static:/static
-    build: .
     restart: always
     ports:
       - "8000:8000"
-      # - "587:587"
     environment:
       - PYTHONUNBUFFERED=1
       - PYTHONDONTWRITEBYTECODE=1
 
   nginx:
-    image: nginx
-    pull_policy: always
+    # image: nginx
+    build:
+      context: .
+      dockerfile: ./server/prod/nginx/Dockerfile
     restart: always
     volumes:
       - static:/static
     ports:
       - "80:80"
+    depends_on:
+      - web
       
 volumes:
   static:

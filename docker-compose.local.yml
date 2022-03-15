@@ -2,10 +2,13 @@ version: '3.8'
 
 services:
   web:
-    image: bidnamic_web
+    # image: bidnamic_web
     volumes:
       - static:/static
-    build: .
+    # build: .
+    build:
+      context: .
+      dockerfile: ./server/local/django/Dockerfile
     restart: always
     ports:
       - "8000:8000"
@@ -15,33 +18,26 @@ services:
       - PYTHONDONTWRITEBYTECODE=1
     depends_on:
       - database
+    env_file:
+      - .env
 
   database:
     restart: always
     image: postgres
-    # volumes:
-    #   - postgres_data:/var/lib/postgresql/data/
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
     environment:
       - POSTGRES_DB=${DB_NAME}
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
     ports:
-      - "5432:${DB_PORT}"
+      - "5432:5432"
+    env_file:
+      - .env
     # expose:
-    #    - 5432     
-  nginx:
-    # image: nginx
-    build:
-      context: .
-      dockerfile: ./nginx/Dockerfile
-    restart: always
-    volumes:
-      - static:/static
-    ports:
-      - "80:80"
-      # - "80:8000"
-    depends_on:
-      - web
+    #    - 5432    
+
       
 volumes:
   static:
+  postgres_data:
