@@ -1,27 +1,30 @@
 name: Run Tests
-on: push
+on: [push,pull_request]
 
 jobs:
   bidnamic:
     runs-on: ubuntu-latest
 
     env:
-      POSTGRES_DB: django
       DB_ENGINE: django.db.backends.postgresql
+      DB_NAME: bidnamic
       DB_USER: bidnamic
       DB_PASSWORD: bidnamic
-      POSTGRES_HOST_AUTH_METHOD: trust
       DB_HOST: localhost
+      DB_PORT: 5432
+      POSTGRES_HOST_AUTH_METHOD: trust
       ENVIRONMENT: prod
+      USE_AWS: Yes
     services:
       postgres:
-        image: postgres:14.0
+        image: postgres:14.2
         ports:
           - 5432:5432
         env:
-          POSTGRES_DB: django
-          DB_USER: bidnamic
+          POSTGRES_DB: bidnamic
           DB_PASSWORD: bidnamic
+          POSTGRES_USER: bidnamic
+          POSTGRES_PASSWORD: bidnamic
           POSTGRES_HOST_AUTH_METHOD: trust
         options: >-
           --health-cmd pg_isready
@@ -36,53 +39,3 @@ jobs:
         pip3 install --user -r requirements.txt
         python3 manage.py migrate
         python3 manage.py test
-
-
-# name: Django CI
-
-# on: [push,pull_request]
-
-# jobs:
-#   build:
-
-#     runs-on: ubuntu-latest
-#     strategy:
-#       max-parallel: 4
-#       matrix:
-#         python-version: [3.9]
-
-#     services:
-#       postgres:
-#         image: postgres:12.6
-#         env:
-#           POSTGRES_USER: postgres
-#           POSTGRES_PASSWORD: postgres
-#           POSTGRES_DB: github_actions
-#         ports:
-#           - 5432:5432
-#         options: >-
-#           --health-cmd pg_isready
-#           --health-interval 10s
-#           --health-timeout 5s
-#           --health-retries 5
-
-#     steps:
-#     - uses: actions/checkout@v2
-#     - name: Set up Python ${{ matrix.python-version }}
-#       uses: actions/setup-python@v2
-#       with:
-#         python-version: ${{ matrix.python-version }}
-#     - name: Install Dependencies
-#       run: |
-#         python -m pip install --upgrade pip
-#         pip install -r requirements.txt
-
-#     - name: Add env vars, connect to PostgreSQL and migrate data
-#       env:
-#         SECRET_KEY: ${{ secrets.SECRET_KEY }}
-#       run: python manage.py migrate
-
-#     - name: Run Tests
-#       env:
-#         SECRET_KEY: ${{ secrets.SECRET_KEY }}
-#       run: python manage.py test
