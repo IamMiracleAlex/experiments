@@ -12,6 +12,7 @@ jobs:
       DB_PASSWORD: bidnamic
       POSTGRES_HOST_AUTH_METHOD: trust
       DB_HOST: localhost
+      ENVIRONMENT: prod
     services:
       postgres:
         image: postgres:14.0
