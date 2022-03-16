@@ -28,7 +28,6 @@ class ApplicationFormTest(TestCase):
         form = self.form_class(data=self.form_data)
         self.assertTrue(form.is_valid())
 
-
     def test_birthdate_validity(self):
         '''
         Assert birthdate must be up to 18 years
@@ -38,7 +37,8 @@ class ApplicationFormTest(TestCase):
         form = self.form_class(data=self.form_data)
 
         self.assertFalse(form.is_valid())
-        self.assertEqual(form.errors['date_of_birth'][0], "You must be 18 years old or older to fill this form")
+        self.assertEqual(form.errors['date_of_birth'][0],
+                         "You must be 18 years old or older to fill this form")
 
     def test_google_accounts_ads_id_validity(self):
         '''
@@ -49,4 +49,5 @@ class ApplicationFormTest(TestCase):
         form = self.form_class(data=self.form_data)
 
         self.assertFalse(form.is_valid())
-        self.assertEqual(form.errors['google_account_ads_id'][0], "Google account ID must be 10 digits")
+        self.assertEqual(
+            form.errors['google_account_ads_id'][0], "Google account ID must be 10 digits")

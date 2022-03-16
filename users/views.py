@@ -9,7 +9,7 @@ from users.forms import LoginForm
 
 class LoginView(View):
     '''Login into the application'''
-    
+
     template_name = 'users/login.html'
     form_class = LoginForm
 
@@ -25,14 +25,17 @@ class LoginView(View):
             user = authenticate(request, username=username, password=password)
 
             if user is not None:
-                login(request, user)
-                messages.success(request, 'Successfully logged in', extra_tags='success')
+                login(request, user) #login user
+                messages.success(
+                    request, 'Successfully logged in', extra_tags='success')
                 return redirect('index')
 
-            messages.error(request, 'Invalid password or username', extra_tags='danger')
+            messages.error(
+                request, 'Invalid password or username', extra_tags='danger')
             return render(request, self.template_name, {'form': form})
 
-        messages.error(request, 'Please correct the errors below', extra_tags='danger')
+        messages.error(request, 'Please correct the errors below',
+                       extra_tags='danger')
         return render(request, self.template_name, {'form': form})
 
 
@@ -41,7 +44,8 @@ class LogoutView(View):
 
     def get(self, request):
         logout(request)
-        messages.success(request, 'Successfully logged out', extra_tags='success')
+        messages.success(request, 'Successfully logged out',
+                         extra_tags='success')
         return redirect('index')
 
 
@@ -56,14 +60,14 @@ class SignupView(View):
         return render(request, self.template_name, {"form": form})
 
     def post(self, request):
-   
+
         form = self.form_class(data=request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Signup successful, please log in', extra_tags='success')
+            messages.success(
+                request, 'Signup successful, please log in', extra_tags='success')
             return redirect('login')
 
-        messages.error(request, 'Please correct the errors below', extra_tags='danger')
+        messages.error(request, 'Please correct the errors below',
+                       extra_tags='danger')
         return render(request, self.template_name, {'form': form})
-
-

@@ -9,9 +9,9 @@ from applications.models import Application
 
 class IndexView(View):
     '''Landing page view'''
-    
+
     template_name = 'applications/index.html'
-    
+
     def get(self, request):
         return render(request, self.template_name)
 
@@ -20,19 +20,21 @@ class CreateView(View):
     '''Create an applicatiom'''
 
     template_name = 'applications/create_applications.html'
-    form_class = ApplicationForm 
-    
+    form_class = ApplicationForm
+
     def get(self, request):
         form = self.form_class()
         return render(request, self.template_name, {'form': form})
-    
+
     def post(self, request):
         form = self.form_class(data=request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Application submitted successfully', extra_tags='success')
+            messages.success(
+                request, 'Application submitted successfully', extra_tags='success')
             return redirect('list')
-        messages.error(request, 'Please correct the errors below', extra_tags='danger')
+        messages.error(request, 'Please correct the errors below',
+                       extra_tags='danger')
         return render(request, self.template_name, {'form': form})
 
 
@@ -45,7 +47,7 @@ class ListView(View):
     def get(self, request):
         applications = Application.objects.all().order_by('-created_at')
 
-        paginator = Paginator(applications, self.paginate_by) 
+        paginator = Paginator(applications, self.paginate_by)
         page = self.request.GET.get('page')
         try:
             applications = paginator.page(page)
@@ -55,7 +57,7 @@ class ListView(View):
         except EmptyPage:
             #  if page is out of range deliver last page of results
             applications = paginator.page(paginator.num_pages)
-    
+
         return render(request, self.template_name, {'applications': applications})
 
 
@@ -65,6 +67,7 @@ class DeleteView(View):
     def get(self, request, id):
         application = get_object_or_404(Application, id=id)
         application.delete()
-        
-        messages.success(request, 'Application deleted successfully', extra_tags='success')
+
+        messages.success(
+            request, 'Application deleted successfully', extra_tags='success')
         return redirect('list')

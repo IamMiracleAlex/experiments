@@ -15,7 +15,9 @@ class Application(models.Model):
     company_name = models.CharField(max_length=150)
     address = models.TextField()
     telephone = models.CharField(max_length=15)
-    bidding_settings = models.SmallIntegerField(choices=BIDDING_SETTING_CHOICES)
-    google_account_ads_id = models.CharField(verbose_name='Google Ads Account ID', max_length=200)
+    bidding_settings = models.SmallIntegerField(
+        choices=BIDDING_SETTING_CHOICES)
+    google_account_ads_id = models.CharField(
+        verbose_name='Google Ads Account ID', max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)

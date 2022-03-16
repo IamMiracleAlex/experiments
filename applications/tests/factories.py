@@ -14,5 +14,6 @@ class ApplicationFactory(factory.django.DjangoModelFactory):
     company_name = factory.Sequence(lambda n: 'company name {}'.format(n))
     address = factory.Sequence(lambda n: 'address {}'.format(n))
     telephone = factory.Sequence(lambda n: '080123456{}'.format(n))
-    bidding_settings = factory.Iterator([x[0] for x in Application.BIDDING_SETTING_CHOICES])
+    bidding_settings = factory.Iterator(
+        [x[0] for x in Application.BIDDING_SETTING_CHOICES])
     google_account_ads_id = factory.Sequence(lambda n: '123456789{}'.format(n))

@@ -13,7 +13,8 @@ class SignupForm(forms.Form):
     username = forms.CharField(max_length=50)
     email = forms.EmailField(max_length=100)
     password = forms.CharField(max_length=30, widget=forms.PasswordInput)
-    confirm_password = forms.CharField(max_length=30, widget=forms.PasswordInput)
+    confirm_password = forms.CharField(
+        max_length=30, widget=forms.PasswordInput)
 
     error_messages = {
         'short_password': _(
@@ -71,7 +72,7 @@ class SignupForm(forms.Form):
                 username=self.cleaned_data.get('username'),
                 email=self.cleaned_data.get('email'),
                 password=self.cleaned_data.get('password'),
-            ) 
+            )
             return user
         except Exception as e:
             raise ValueError(

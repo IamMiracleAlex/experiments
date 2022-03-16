@@ -4,7 +4,7 @@ from applications.models import Application
 from applications.tests.factories import ApplicationFactory
 
 
-class ApplicationViewTest(TestCase):   
+class ApplicationViewTest(TestCase):
 
     def test_index_page(self):
         '''Assert index page loads'''
@@ -13,7 +13,8 @@ class ApplicationViewTest(TestCase):
         resp = self.client.get(url)
         self.assertEqual(resp.status_code, 200)
         self.assertTemplateUsed(resp, 'applications/index.html')
-        self.assertIn(b'Welcome To Bidnamic Multipart Form Wizard', resp.content)
+        self.assertIn(
+            b'Welcome To Bidnamic Multipart Form Wizard', resp.content)
 
     def test_create_application(self):
         '''Assert create page loads and applications can be submitted'''
@@ -38,7 +39,7 @@ class ApplicationViewTest(TestCase):
         resp = self.client.post(url, data)
         self.assertEqual(resp.status_code, 302)
         self.assertEqual(resp.url, '/list')
-      
+
     def test_list_page(self):
         '''Assert application list page works'''
 

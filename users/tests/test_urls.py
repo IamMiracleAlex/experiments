@@ -12,17 +12,14 @@ class UserUrlsResolvesToViewTest(SimpleTestCase):
         found = resolve(reverse('login'))
         self.assertEqual(found.func.view_class, views.LoginView)
 
-    
     def test_logout_url_resolves_to_logout_view(self):
         '''assert that the logout url resolves to the logout view class'''
 
         found = resolve(reverse('logout'))
-        self.assertEqual(found.func.view_class, views.LogoutView) 
+        self.assertEqual(found.func.view_class, views.LogoutView)
 
-    
     def test_signup_url_resolves_to_register_view(self):
         '''assert that the signup url resolves to the signup view'''
 
         found = resolve(reverse('signup'))
-        self.assertEqual(found.func.view_class, views.SignupView)       
-      
+        self.assertEqual(found.func.view_class, views.SignupView)

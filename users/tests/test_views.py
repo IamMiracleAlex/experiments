@@ -4,12 +4,12 @@ from users.models import User
 from users.tests.factories import UserFactory
 
 
-class LoginViewTest(TestCase):   
+class LoginViewTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
         cls.url = '/login'
-        cls.data = { 
+        cls.data = {
             'username': 'username',
             'password': 'thiscool123'
         }
@@ -19,7 +19,6 @@ class LoginViewTest(TestCase):
 
         resp = self.client.post(self.url, self.data,)
         self.assertIn(b'Invalid password or username', resp.content)
-      
 
     def test_login(self):
         '''Login with correct credentials'''
@@ -30,7 +29,6 @@ class LoginViewTest(TestCase):
 
         self.assertEqual(resp.status_code, 302)
         self.assertEqual(resp.url, '/')
-   
 
 
 class SignUpViewTest(TestCase):
@@ -40,11 +38,11 @@ class SignUpViewTest(TestCase):
 
         cls.url = '/signup'
         cls.data = {
-                    'email':'email@example.com',
-                    'username': 'miracle',
-                    'password': 'password',
-                    'confirm_password': 'password'
-                    }
+            'email': 'email@example.com',
+            'username': 'miracle',
+            'password': 'password',
+            'confirm_password': 'password'
+        }
 
     def test_user_creation(self):
         '''Test create new user '''
@@ -53,7 +51,7 @@ class SignUpViewTest(TestCase):
         # creates user and redirects to login
         self.assertEqual(resp.status_code, 302)
         self.assertEqual(resp.url, '/login')
-    
+
     def test_validates_existing_username_and_email(self):
         '''
         Assert users cannot create acct with existing emails or username
@@ -63,6 +61,7 @@ class SignUpViewTest(TestCase):
 
         self.data['confirm_password'] = self.data['password']
         resp = self.client.post(self.url, self.data)
-        
-        self.assertIn(b'This email address is already registered', resp.content)
+
+        self.assertIn(
+            b'This email address is already registered', resp.content)
         self.assertIn(b'This username is already registered', resp.content)

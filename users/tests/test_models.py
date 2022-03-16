@@ -10,8 +10,8 @@ class UserTest(TestCase):
 
         user = UserFactory()
 
-        self.assertIsNotNone(user.username) 
-        self.assertIsNotNone(user.email) 
-        self.assertFalse(user.is_superuser) 
-        self.assertFalse(user.is_staff) 
+        self.assertIsNotNone(user.username)
+        self.assertIsNotNone(user.email)
+        self.assertFalse(user.is_superuser)
+        self.assertFalse(user.is_staff)
         self.assertIsNotNone(user.password)
