@@ -23,6 +23,10 @@ This application can be run without docker, to do so, please see instructions be
 Tests are written using `django.tests.Testcase`, we run all tests as follows:
 `python manage.py test`
 
+## Run Tests (Docker)
+To run tests with docker
+Run `docker-compose -f docker-compose.local.yml exec web python manage.py test`
+
 ## Test Coverage
 To run the tests, check your test coverage, and generate an HTML coverage report:
 -  `coverage erase`

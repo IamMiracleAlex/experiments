@@ -9,7 +9,7 @@ services:
       dockerfile: ./server/local/django/Dockerfile
     restart: always
     ports:
-      - "8000:8000"
+      - "8080:8000"
     environment:
       - PYTHONUNBUFFERED=1
       - PYTHONDONTWRITEBYTECODE=1
@@ -40,7 +40,7 @@ services:
     volumes:
       - static:/static
     ports:
-      - "80:80"
+      - "8000:80"
     depends_on:
       - web
 
