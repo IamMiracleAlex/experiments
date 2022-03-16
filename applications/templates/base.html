@@ -16,25 +16,25 @@
                 width: 180% !important;
             }
         }
-/*     
+/*
         @keyframes Slide_up {
             0% {
                 transform: translateY(250px);
             }
-    
+
             100% {
                 transform: translateY(0);
             }
         }
-    
+
         #intro {
             animation: Slide_up 2.1s ease;
         } */
-       
+
     </style>
 
     {% block css %}
-    
+
     {% endblock css %}
 
 </head>
@@ -62,7 +62,7 @@
                 <li class="nav-item mr-5">
                     <a class="nav-link text-black font-weight-bold" href="{% url 'list' %}">See All Applications</a>
                 </li>
-                
+
                 {% if user.is_authenticated %}
 
                 <li class="nav-item mr-1">
@@ -73,7 +73,7 @@
                 </li>
                 {% else %}
                 <li class="nav-item mr-1">
-                    <a class="nav-link text-black font-weight-bold" href="{% url 'login' %}">Login</a> 
+                    <a class="nav-link text-black font-weight-bold" href="{% url 'login' %}">Login</a>
                 </li>
                 <li class="nav-item mr-1">
                     <a class="nav-link text-black font-weight-bold" href="{% url 'signup' %}">Sign Up</a>
@@ -86,9 +86,9 @@
 
 
     {% block content %}
-    
-    
-    
+
+
+
     {% endblock content %}
 
 
@@ -106,7 +106,7 @@
         }, 6000);
        </script>
         {% block javascript %}
-        
+
         {% endblock javascript %}
 </body>
 

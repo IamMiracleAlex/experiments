@@ -6,13 +6,13 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: experiments
+        working-directory: .
     env:
       POSTGRES_DB: django
       DB_ENGINE: django.db.backends.postgresql
       DB_USER: bidnamic
       DB_PASSWORD: bidnamic
-      POSTGRES_HOST_AUTH_METHOD: trust      
+      POSTGRES_HOST_AUTH_METHOD: trust
       DB_HOST: localhost
     services:
       postgres:

@@ -5,21 +5,20 @@ from users import views
 
 
 class UserUrlsResolvesToViewTest(SimpleTestCase):
-
     def test_login_url_resolves_to_login_view(self):
-        '''assert that login url resolves to the login view class'''
+        """assert that login url resolves to the login view class"""
 
-        found = resolve(reverse('login'))
+        found = resolve(reverse("login"))
         self.assertEqual(found.func.view_class, views.LoginView)
 
     def test_logout_url_resolves_to_logout_view(self):
-        '''assert that the logout url resolves to the logout view class'''
+        """assert that the logout url resolves to the logout view class"""
 
-        found = resolve(reverse('logout'))
+        found = resolve(reverse("logout"))
         self.assertEqual(found.func.view_class, views.LogoutView)
 
     def test_signup_url_resolves_to_register_view(self):
-        '''assert that the signup url resolves to the signup view'''
+        """assert that the signup url resolves to the signup view"""
 
-        found = resolve(reverse('signup'))
+        found = resolve(reverse("signup"))
         self.assertEqual(found.func.view_class, views.SignupView)

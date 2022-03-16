@@ -6,7 +6,7 @@ The basic requirements needed to run this application
 ## To Run (Docker)
 To run this application with docker, please use the following instructions
 - `start Docker`, version `3.8` or highter is recommended
-- copy `.env.local.sample` to `.env` 
+- copy `.env.local.sample` to `.env`
 - `docker-compose -f docker-compose.local.yml up --build`
 - Go to `localhost:8000` to access the site
 
@@ -30,6 +30,11 @@ To run the tests, check your test coverage, and generate an HTML coverage report
 -  `coverage report` (to view reports on the terminal)
 -  `coverage html` and open `htmlcov/index.html` to view reports on the browser
 
+## To Use Precommit Hoook
+To run hooks on every commit and automatically point out issues in code such as missing semicolons, trailing whitespace, and debug statements, please run:
+- run `pre-commit install` to set up the git hook scripts
+Now pre-commit will run automatically on git commit!
+Optionally run against all the files `pre-commit run --all-files`
 
 ## In Production
 To run in production environment, please note the following:

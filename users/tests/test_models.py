@@ -4,9 +4,8 @@ from users.tests.factories import UserFactory
 
 
 class UserTest(TestCase):
-
     def test_model_creation(self):
-        '''Assert that the User model was created properly'''
+        """Assert that the User model was created properly"""
 
         user = UserFactory()
 

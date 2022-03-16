@@ -42,7 +42,7 @@ Needless to say, we like tests.
 
 Hooking up some authentication into the app would be nice.
 
-Making it look nice with a UI framework such as Twitter Bootstrap. 
+Making it look nice with a UI framework such as Twitter Bootstrap.
 
 ### Submission
 

@@ -4,9 +4,8 @@ from applications.tests.factories import ApplicationFactory
 
 
 class ApplicationTest(TestCase):
-
     def test_model_creation(self):
-        '''Assert that the Application model was created properly'''
+        """Assert that the Application model was created properly"""
 
         app = ApplicationFactory()
 

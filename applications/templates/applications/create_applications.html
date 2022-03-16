@@ -10,8 +10,8 @@
                 <h3 class="text-center mt-4 text-primary">Submit An Application</h3>
 
                 <h5 class="text-center mt-4"><a class="btn btn-primary font-weight-bold" href="{% url 'list' %}">See All Applications</a> </h5>
-       
-                <br> 
+
+                <br>
 
                     <div class="col-lg-8 mx-auto ">
                         {% if messages %}
@@ -27,14 +27,14 @@
                     {% csrf_token %}
 
                     {{ form|crispy }}
- 
-                <button type="submit" id="submit" class="btn btn-block btn-primary">Submit</button>  
-                                  
+
+                <button type="submit" id="submit" class="btn btn-block btn-primary">Submit</button>
+
                 </form>
 
             </div>
-        
-       
+
+
         </div>
     </div>
 
