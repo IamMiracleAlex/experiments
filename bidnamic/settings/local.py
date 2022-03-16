@@ -3,6 +3,8 @@ from .base import *
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-ncqfv4_t#v5slu7@trb1m8)k-y5wa5yh7uyvuhcs(6(7#*7lis')
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
