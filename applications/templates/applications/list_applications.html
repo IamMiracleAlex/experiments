@@ -64,7 +64,7 @@
                         <td>{{ app.created_at }}</td>
                         <td>
 
-                            <a href="{% url 'delete' app.pk %}" class="delete btn btn-sm btn-danger" data-confirm="Are you sure you want delete this application? This action is irreversible.">
+                            <a href="{% url 'delete' app.pk %}" class="delete btn btn-sm btn-danger" >
                                 <i class="fas fa-trash"></i> Delete
                             </a>
                         </td>
@@ -92,24 +92,3 @@
 
 
 {% endblock content %}
-
-
-{% block javascript %}
-
-    <script>
-        var deleteLinks = document.querySelectorAll('.delete');
-
-        for (var i = 0; i < deleteLinks.length; i++) {
-            deleteLinks[i].addEventListener('click', function (event) {
-                event.preventDefault();
-
-                var choice = confirm(this.getAttribute('data-confirm'));
-
-                if (choice) {
-                    window.location.href = this.getAttribute('href');
-                }
-            });
-        }
-    </script>
-
-{% endblock javascript %}

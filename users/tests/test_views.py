@@ -17,7 +17,7 @@ class LoginViewTest(TestCase):
             self.url,
             self.data,
         )
-        self.assertIn(b"Invalid password or username", resp.content)
+        self.assertIn(b"Please enter a correct username and password.", resp.content)
 
     def test_login(self):
         """Login with correct credentials"""

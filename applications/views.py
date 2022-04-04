@@ -1,24 +1,25 @@
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.shortcuts import get_object_or_404, redirect, render
-from django.views import View
+from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
+from django.views import View, generic
 
 from applications.forms import ApplicationForm
 from applications.models import Application
 
 
-class IndexView(View):
+class IndexView(generic.TemplateView):
     """Landing page view"""
 
     template_name = "applications/index.html"
 
-    def get(self, request):
-        return render(request, self.template_name)
 
-
-class CreateView(View):
+class CreateView(LoginRequiredMixin, View):
     """Create an applicatiom"""
 
+    login_url = "/login"
+    redirect_field_name = "next"
     template_name = "applications/create_applications.html"
     form_class = ApplicationForm
 
@@ -61,14 +62,18 @@ class ListView(View):
         return render(request, self.template_name, {"applications": applications})
 
 
-class DeleteView(View):
+class DeleteView(LoginRequiredMixin, generic.DeleteView):
     """Delete applications"""
 
-    def get(self, request, id):
-        application = get_object_or_404(Application, id=id)
-        application.delete()
+    model = Application
+    login_url = "/login"
+    redirect_field_name = "next"
+    success_url = reverse_lazy("list")
+
+    def delete(self, request, *args, **kwargs):
+        response = super().delete(request, *args, **kwargs)
 
         messages.success(
             request, "Application deleted successfully", extra_tags="success"
         )
-        return redirect("list")
+        return response

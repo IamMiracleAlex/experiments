@@ -1,17 +1,6 @@
 from django.test import TestCase
 
-from users.forms import LoginForm, SignupForm
-
-
-class LoginFormTest(TestCase):
-    def test_login_form(self):
-        """
-        Assert that login form works as expected
-        """
-
-        login_data = {"username": "miracle", "password": "password"}
-        form = LoginForm(data=login_data)
-        self.assertTrue(form.is_valid())
+from users.forms import SignupForm
 
 
 class SignupFormTest(TestCase):

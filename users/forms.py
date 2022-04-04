@@ -4,11 +4,6 @@ from django.utils.translation import ugettext_lazy as _
 from users.models import User
 
 
-class LoginForm(forms.Form):
-    username = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput)
-
-
 class SignupForm(forms.Form):
     username = forms.CharField(max_length=50)
     email = forms.EmailField(max_length=100)

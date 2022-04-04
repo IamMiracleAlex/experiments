@@ -2,9 +2,13 @@ from django.test import TestCase
 
 from applications.models import Application
 from applications.tests.factories import ApplicationFactory
+from users.tests.factories import UserFactory
 
 
 class ApplicationViewTest(TestCase):
+    def setUp(self):
+        self.user = UserFactory()
+
     def test_index_page(self):
         """Assert index page loads"""
 
@@ -18,6 +22,7 @@ class ApplicationViewTest(TestCase):
         """Assert create page loads and applications can be submitted"""
 
         url = "/create"
+        self.client.force_login(self.user)
         resp = self.client.get(url)
         self.assertEqual(resp.status_code, 200)
         self.assertTemplateUsed(resp, "applications/create_applications.html")
@@ -44,6 +49,7 @@ class ApplicationViewTest(TestCase):
         # create applications
         url = "/list"
         apps = ApplicationFactory.create_batch(5)
+        self.client.force_login(self.user)
         resp = self.client.get(url)
 
         self.assertEqual(resp.status_code, 200)
@@ -54,8 +60,9 @@ class ApplicationViewTest(TestCase):
         """Assert delete action works"""
 
         app = ApplicationFactory()
-        url = f"/delete/{app.id}"
-        resp = self.client.get(url)
+        url = f"/{app.id}/delete"
+        self.client.force_login(self.user)
+        resp = self.client.post(url)
 
         self.assertEqual(resp.status_code, 302)
         self.assertEqual(resp.url, "/list")

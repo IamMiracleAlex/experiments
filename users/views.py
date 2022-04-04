@@ -1,49 +1,17 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.views import LoginView
+from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect, render
 from django.views import View
 
-from users.forms import LoginForm, SignupForm
+from users.forms import SignupForm
 
 
-class LoginView(View):
-    """Login into the application"""
+class CustomLoginView(SuccessMessageMixin, LoginView):
+    """Logs in a user"""
 
     template_name = "users/login.html"
-    form_class = LoginForm
-
-    def get(self, request):
-        form = self.form_class()
-        return render(request, self.template_name, {"form": form})
-
-    def post(self, request):
-        form = self.form_class(data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data["username"]
-            password = form.cleaned_data["password"]
-            user = authenticate(request, username=username, password=password)
-
-            if user is not None:
-                login(request, user)  # login user
-                messages.success(
-                    request, "Successfully logged in", extra_tags="success"
-                )
-                return redirect("index")
-
-            messages.error(request, "Invalid password or username", extra_tags="danger")
-            return render(request, self.template_name, {"form": form})
-
-        messages.error(request, "Please correct the errors below", extra_tags="danger")
-        return render(request, self.template_name, {"form": form})
-
-
-class LogoutView(View):
-    """Logout from current session"""
-
-    def get(self, request):
-        logout(request)
-        messages.success(request, "Successfully logged out", extra_tags="success")
-        return redirect("index")
+    success_message = "Successfully logged in"
 
 
 class SignupView(View):
